@@ -44,5 +44,6 @@ class BudgetListView(LoginRequiredMixin, generic.ListView):
     model = Budget
     context_object_name = "budget_list"
     template_name = "planner/budget_list.html"
-    queryset = Budget.objects.all()
+    queryset = Budget.objects.select_related("owner")
+
 

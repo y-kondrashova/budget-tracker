@@ -9,11 +9,15 @@
         <th>Budget name</th>
       </tr>
       {% for category in category_list %}
-        <tr>
-          <td>{{ category.title }}</td>
-          <td>{{ category.budget.title }}</td>
-        </tr>
+        {% if category.budget.owner.id == user.id %}
+          <tr>
+            <td>{{ category.title }}</td>
+            <td>{{ category.budget.title }}</td>
+          </tr>
+        {% endif %}
       {% endfor %}
     </table>
+  {% else %}
+    <p>There's no category to display</p>
   {% endif %}
 {% endblock %}

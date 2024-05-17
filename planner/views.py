@@ -63,6 +63,16 @@ class BudgetListView(LoginRequiredMixin, generic.ListView):
     queryset = Budget.objects.select_related("owner")
 
 
+class BudgetCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Budget
+    fields = ["title", "balance"]
+    success_url = reverse_lazy("planner:budget-list")
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
+
+
 class TransactionListView(LoginRequiredMixin, generic.ListView):
     model = Transaction
     context_object_name = "transaction_list"

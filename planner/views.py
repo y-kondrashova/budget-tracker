@@ -28,7 +28,9 @@ def register(request) -> HttpResponse:
             login(request, user)
             return redirect("planner:index")
         else:
-            return render(request, "registration/register.html", {"form": form})
+            return render(request,
+                          "registration/register.html",
+                          {"form": form})
 
 
 class CategoryListView(LoginRequiredMixin, generic.ListView):

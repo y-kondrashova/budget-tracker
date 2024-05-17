@@ -6,6 +6,7 @@ from planner.views import (
     register,
     BudgetListView,
     CategoryListView,
+    TransactionListView
 )
 
 urlpatterns = [
@@ -14,6 +15,11 @@ urlpatterns = [
     path("categories/", CategoryListView.as_view(), name="category-list")
     path("categories/", CategoryListView.as_view(), name="category-list"),
     path("budgets/", BudgetListView.as_view(), name="budget-list"),
+    path(
+        "transactions/",
+        TransactionListView.as_view(),
+        name="transaction-list"
+    ),
 ]
 
 app_name = "planner"

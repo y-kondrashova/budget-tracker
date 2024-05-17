@@ -37,4 +37,5 @@ class CategoryListView(LoginRequiredMixin, generic.ListView):
     model = Category
     context_object_name = "category_list"
     template_name = "planner/category_list.html"
+    queryset = Category.objects.select_related("budget__owner")
 

@@ -11,6 +11,9 @@ class Budget(models.Model):
                          null=True,
                          default_currency="USD")
 
+    def __str__(self):
+        return f"{self.title} (balance: {self.balance})"
+
 
 class Category(models.Model):
     budget = models.ForeignKey(Budget, on_delete=models.CASCADE)

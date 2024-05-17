@@ -1,9 +1,12 @@
 from django.contrib import messages
 from django.contrib.auth import login
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.views import generic
 
 from planner.forms import RegisterForm
+from planner.models import Category
 
 
 def index(request):
@@ -26,3 +29,10 @@ def register(request) -> HttpResponse:
             return redirect("planner:index")
         else:
             return render(request, "registration/register.html", {"form": form})
+
+
+class CategoryListView(LoginRequiredMixin, generic.ListView):
+    model = Category
+    context_object_name = "category_list"
+    template_name = "planner/category_list.html"
+

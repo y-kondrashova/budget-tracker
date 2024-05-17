@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Category list</h1>
+  {% if category_list %}
+    <table class="table">
+      <tr>
+        <th>Title</th>
+        <th>Budget name</th>
+      </tr>
+      {% for category in category_list %}
+        <tr>
+          <td>{{ category.title }}</td>
+          <td>{{ category.budget.title }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% endif %}
+{% endblock %}

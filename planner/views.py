@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.views import generic
 
 from planner.forms import RegisterForm
-from planner.models import Category, Budget
+from planner.models import Category, Budget, Transaction
 
 
 def index(request):
@@ -47,3 +47,8 @@ class BudgetListView(LoginRequiredMixin, generic.ListView):
     queryset = Budget.objects.select_related("owner")
 
 
+class TransactionListView(LoginRequiredMixin, generic.ListView):
+    model = Transaction
+    context_object_name = "transaction_list"
+    template_name = "planner/transaction_list.html"
+    queryset = Transaction.objects.select_related("budget__owner")

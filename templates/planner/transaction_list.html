@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Transaction list</h1>
+  {% if transaction_list %}
+    <table class="table">
+      <tr>
+        <th>Type</th>
+        <th>Amount</th>
+        <th>Currency</th>
+        <th>Date</th>
+        <th>Category</th>
+        <th>Budget</th>
+      </tr>
+      {% for transaction in transaction_list %}
+        {% if transaction.budget.owner.id == user.id %}
+          <tr>
+            <td>{{ transaction.transaction_type }}</td>
+            <td>{{ transaction.amount }}</td>
+            <td>{{ transaction.amount_currency }}</td>
+            <td>{{ transaction.date }}</td>
+            <td>{{ transaction.category.title }}</td>
+            <td>{{ transaction.budget.title }}</td>
+          </tr>
+        {% endif %}
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>There's no category to display</p>
+  {% endif %}
+{% endblock %}

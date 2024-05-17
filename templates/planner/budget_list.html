@@ -2,6 +2,7 @@
 
 {% block content %}
   <h1>Budget list</h1>
+  <a href="{% url 'planner:budget-create' %}">Create a new budget</a>
   {% if budget_list %}
     <table class="table">
       <tr>

@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
-from planner.forms import RegisterForm, CategoryForm
+from planner.forms import RegisterForm, TransactionForm
 from planner.models import Category, Budget, Transaction
 
 
@@ -73,3 +73,18 @@ class TransactionListView(LoginRequiredMixin, generic.ListView):
     context_object_name = "transaction_list"
     template_name = "planner/transaction_list.html"
     queryset = Transaction.objects.select_related("budget__owner")
+
+
+class TransactionCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Transaction
+    form_class = TransactionForm
+    success_url = reverse_lazy("planner:transaction-list")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["user"] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)

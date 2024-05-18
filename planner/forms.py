@@ -1,8 +1,8 @@
+from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django import forms
 
-from planner.models import Category, Budget
+from planner.models import Budget, Transaction
 
 
 class RegisterForm(UserCreationForm):
@@ -11,10 +11,10 @@ class RegisterForm(UserCreationForm):
         fields = ["username", "email", "password1", "password2"]
 
 
-class CategoryForm(forms.ModelForm):
+class TransactionForm(forms.ModelForm):
     class Meta:
-        model = Category
-        fields = ["title", "budget"]
+        model = Transaction
+        fields = ["transaction_type", "amount", "budget", "category"]
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop("user")

@@ -38,21 +38,16 @@ class CategoryListView(LoginRequiredMixin, generic.ListView):
     model = Category
     context_object_name = "category_list"
     template_name = "planner/category_list.html"
-    queryset = Category.objects.select_related("budget__owner")
+    queryset = Category.objects.select_related("owner")
 
 
 class CategoryCreateView(LoginRequiredMixin, generic.CreateView):
     model = Category
-    form_class = CategoryForm
+    fields = ["title"]
     success_url = reverse_lazy("planner:category-list")
 
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs["user"] = self.request.user
-        return kwargs
-
     def form_valid(self, form):
-        form.instance.budget = form.cleaned_data["budget"]
+        form.instance.owner = self.request.user
         return super().form_valid(form)
 
 

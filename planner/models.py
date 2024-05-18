@@ -16,8 +16,11 @@ class Budget(models.Model):
 
 
 class Category(models.Model):
-    budget = models.ForeignKey(Budget, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
 
 
 class Transaction(models.Model):

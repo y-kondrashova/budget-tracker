@@ -2,6 +2,7 @@
 
 {% block content %}
   <h1>Transaction list</h1>
+  <a href="{% url 'planner:transaction-create' %}">Create new transaction</a>
   {% if transaction_list %}
     <table class="table">
       <tr>

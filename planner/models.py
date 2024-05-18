@@ -32,15 +32,27 @@ class Transaction(models.Model):
     budget = models.ForeignKey(Budget, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     transaction_type = models.CharField(max_length=50, choices=type_choices)
-    amount = MoneyField(max_digits=10, decimal_places=2)
-    date = models.DateField(auto_now_add=True)
+    amount = MoneyField(max_digits=10,
+                        decimal_places=2,
+                        default_currency="USD")
+    date = models.DateTimeField(auto_now_add=True)
 
-    def income(self, *args, **kwargs):
-        self.budget.balance += self.amount
+    class Meta:
+        ordering = ["-date", "category"]
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            if self.transaction_type == "Income":
+                self.budget.balance += self.amount
+            elif self.transaction_type == "Outcome":
+                self.budget.balance -= self.amount
         self.budget.save()
         super(Transaction, self).save(*args, **kwargs)
 
-    def outcome(self, *args, **kwargs):
-        self.budget.balance -= self.amount
+    def delete(self, *args, **kwargs):
+        if self.transaction_type == "Income":
+            self.budget.balance -= self.amount
+        elif self.transaction_type == "Outcome":
+            self.budget.balance += self.amount
         self.budget.save()
         super(Transaction, self).delete(*args, **kwargs)

@@ -7,6 +7,7 @@ from planner.views import (
     BudgetListView,
     CategoryListView,
     CategoryCreateView,
+    TransactionCreateView,
     TransactionListView
 )
 
@@ -20,6 +21,11 @@ urlpatterns = [
         "transactions/",
         TransactionListView.as_view(),
         name="transaction-list"
+    ),
+    path(
+        "transactions/create/",
+        TransactionCreateView.as_view(),
+        name="transaction-create"
     ),
     path(
         "categories/create/",

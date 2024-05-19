@@ -10,6 +10,7 @@
         <th>Balance</th>
         <th>Currency</th>
         <th>Update</th>
+        <th>Delete</th>
       </tr>
       {% for budget in budget_list %}
         {% if budget.owner.id == user.id %}
@@ -18,6 +19,7 @@
             <td>{{ budget.balance }}</td>
             <td>{{ budget.balance_currency }}</td>
             <td><a href="{% url 'planner:budget-update' budget.id %}">Update</a></td>
+          <td><a href="{% url 'planner:budget-delete' budget.id %}">Delete</a></td>
           </tr>
         {% endif %}
       {% endfor %}

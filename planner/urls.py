@@ -15,6 +15,7 @@ from planner.views import (
     TransactionListView,
     TransactionUpdateView,
     TransactionDeleteView,
+    TransferListView,
 )
 
 urlpatterns = [
@@ -68,6 +69,7 @@ urlpatterns = [
         TransactionDeleteView.as_view(),
         name="transaction-delete"
     ),
+    path("transfers/", TransferListView.as_view(), name="transfer-list"),
 ]
 
 app_name = "planner"

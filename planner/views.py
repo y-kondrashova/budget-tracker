@@ -85,6 +85,11 @@ class BudgetUpdateView(LoginRequiredMixin, generic.UpdateView):
     success_url = reverse_lazy("planner:budget-list")
 
 
+class BudgetDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Budget
+    success_url = reverse_lazy("planner:budget-list")
+
+
 class TransactionListView(LoginRequiredMixin, generic.ListView):
     model = Transaction
     context_object_name = "transaction_list"

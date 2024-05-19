@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from planner.forms import RegisterForm, TransactionForm
-from planner.models import Category, Budget, Transaction
+from planner.models import Category, Budget, Transaction, Transfer
 
 
 def index(request):
@@ -121,3 +121,13 @@ class TransactionUpdateView(LoginRequiredMixin, generic.UpdateView):
 class TransactionDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Transaction
     success_url = reverse_lazy("planner:transaction-list")
+
+
+class TransferListView(LoginRequiredMixin, generic.ListView):
+    model = Transfer
+    context_object_name = "transfer_list"
+    template_name = "planner/transfer_list.html"
+    queryset = Transfer.objects.select_related(
+        "from_budget__owner",
+        "to_budget__owner"
+    )

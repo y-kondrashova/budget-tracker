@@ -57,6 +57,11 @@ class CategoryUpdateView(LoginRequiredMixin, generic.UpdateView):
     success_url = reverse_lazy("planner:category-list")
 
 
+class CategoryDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Category
+    success_url = reverse_lazy("planner:category-list")
+
+
 class BudgetListView(LoginRequiredMixin, generic.ListView):
     model = Budget
     context_object_name = "budget_list"

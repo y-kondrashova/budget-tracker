@@ -12,6 +12,7 @@
         <th>Date</th>
         <th>Category</th>
         <th>Budget</th>
+        <th>Update</th>
       </tr>
       {% for transaction in transaction_list %}
         {% if transaction.budget.owner.id == user.id %}
@@ -22,6 +23,7 @@
             <td>{{ transaction.date }}</td>
             <td>{{ transaction.category.title }}</td>
             <td>{{ transaction.budget.title }}</td>
+            <td><a href="{% url 'planner:transaction-update' transaction.id %}">Update</a></td>
           </tr>
         {% endif %}
       {% endfor %}

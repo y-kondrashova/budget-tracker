@@ -31,7 +31,9 @@ class Transaction(models.Model):
         ("Outcome", "Outcome"),
     )
     budget = models.ForeignKey(Budget, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey(Category,
+                                 on_delete=models.SET_NULL,
+                                 null=True)
     transaction_type = models.CharField(max_length=50, choices=type_choices)
     amount = MoneyField(max_digits=10,
                         decimal_places=2,

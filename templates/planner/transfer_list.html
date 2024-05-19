@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Transfer list</h1>
+  {% if transfer_list %}
+    <table class="table">
+      <tr>
+        <th>From</th>
+        <th>To</th>
+        <th>Amount</th>
+        <th>Date</th>
+      </tr>
+      {% for transfer in transfer_list %}
+        {% if transfer.from_budget.owner.id == user.id and transfer.to_budget.owner.id == user.id %}
+          <tr>
+            <td>{{ transfer.from_budget }}</td>
+          <td>{{ transfer.to_budget }}</td>
+          <td>{{ transfer.amount }}</td>
+          <td>{{ transfer.date }}</td>
+          </tr>
+        {% endif %}
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>There's no transfer to display</p>
+  {% endif %}
+{% endblock %}

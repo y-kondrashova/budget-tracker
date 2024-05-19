@@ -22,6 +22,11 @@ urlpatterns = [
     path("register/", register, name="register"),
     path("categories/", CategoryListView.as_view(), name="category-list"),
     path(
+        "categories/create/",
+        CategoryCreateView.as_view(),
+        name="category-create"
+    ),
+    path(
         "categories/<int:pk>/update/",
         CategoryUpdateView.as_view(),
         name="category-update"
@@ -62,11 +67,6 @@ urlpatterns = [
         "transactions/<int:pk>/delete/",
         TransactionDeleteView.as_view(),
         name="transaction-delete"
-    ),
-    path(
-        "categories/create/",
-        CategoryCreateView.as_view(),
-        name="category-create"
     ),
 ]
 

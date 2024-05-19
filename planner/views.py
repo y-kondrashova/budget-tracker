@@ -39,7 +39,16 @@ class ProfileDetailView(LoginRequiredMixin, generic.DetailView):
     model = User
     context_object_name = "user"
 
-    def get_object(self):
+    def get_object(self, queryset=None):
+        return self.request.user
+
+
+class ProfileUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = User
+    fields = ["first_name", "last_name", "username", "email"]
+    success_url = reverse_lazy("planner:profile")
+
+    def get_object(self, queryset=None):
         return self.request.user
 
 

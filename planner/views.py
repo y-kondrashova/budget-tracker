@@ -79,6 +79,12 @@ class BudgetCreateView(LoginRequiredMixin, generic.CreateView):
         return super().form_valid(form)
 
 
+class BudgetUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Budget
+    fields = ["title", "balance"]
+    success_url = reverse_lazy("planner:budget-list")
+
+
 class TransactionListView(LoginRequiredMixin, generic.ListView):
     model = Transaction
     context_object_name = "transaction_list"

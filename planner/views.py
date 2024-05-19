@@ -116,3 +116,8 @@ class TransactionUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Transaction
     fields = "__all__"
     success_url = reverse_lazy("planner:transaction-list")
+
+
+class TransactionDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Transaction
+    success_url = reverse_lazy("planner:transaction-list")

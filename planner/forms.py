@@ -21,6 +21,17 @@ class TransactionForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields["budget"].queryset = Budget.objects.filter(owner=user)
 
+    def clean(self):
+        cleaned_data = super().clean()
+        budget = cleaned_data.get("budget")
+        amount = cleaned_data.get("amount")
+
+        if budget and amount:
+            if budget.balance.currency != amount.currency:
+                raise forms.ValidationError("The budget and transaction amount must have the same currency.")
+
+        return cleaned_data
+
 
 class TransferForm(forms.ModelForm):
     class Meta:

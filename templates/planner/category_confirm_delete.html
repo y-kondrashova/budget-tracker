@@ -2,7 +2,7 @@
 
 {% block content %}
   <div class="alert alert-danger" role="alert">
-    <h1>Delete manufacturer</h1>
+    <h1>Delete {{ category.title }} category</h1>
     Are you sure that you want to delete {{ category.title }} category?
   </div>
   {% include 'includes/confirm_delete_form.html' %}

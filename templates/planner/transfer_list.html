@@ -2,6 +2,7 @@
 
 {% block content %}
   <h1>Transfer list</h1>
+  <a href="{% url 'planner:transfer-create' %}">Create new transfer</a>
   {% if transfer_list %}
     <table class="table">
       <tr>
@@ -13,10 +14,10 @@
       {% for transfer in transfer_list %}
         {% if transfer.from_budget.owner.id == user.id and transfer.to_budget.owner.id == user.id %}
           <tr>
-            <td>{{ transfer.from_budget }}</td>
-          <td>{{ transfer.to_budget }}</td>
-          <td>{{ transfer.amount }}</td>
-          <td>{{ transfer.date }}</td>
+            <td>{{ transfer.from_budget.title }}</td>
+            <td>{{ transfer.to_budget.title }}</td>
+            <td>{{ transfer.amount }}</td>
+            <td>{{ transfer.date }}</td>
           </tr>
         {% endif %}
       {% endfor %}

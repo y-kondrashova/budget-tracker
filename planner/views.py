@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -32,6 +33,14 @@ def register(request) -> HttpResponse:
             return render(request,
                           "registration/register.html",
                           {"form": form})
+
+
+class ProfileDetailView(LoginRequiredMixin, generic.DetailView):
+    model = User
+    context_object_name = "user"
+
+    def get_object(self):
+        return self.request.user
 
 
 class CategoryListView(LoginRequiredMixin, generic.ListView):

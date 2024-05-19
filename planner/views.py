@@ -94,7 +94,7 @@ class TransactionListView(LoginRequiredMixin, generic.ListView):
     model = Transaction
     context_object_name = "transaction_list"
     template_name = "planner/transaction_list.html"
-    queryset = Transaction.objects.select_related("budget__owner")
+    queryset = Transaction.objects.select_related("budget__owner", "category")
 
 
 class TransactionCreateView(LoginRequiredMixin, generic.CreateView):

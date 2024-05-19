@@ -1,5 +1,7 @@
-from django.db import models
+from datetime import datetime
+
 from django.contrib.auth.models import AbstractUser, User
+from django.db import models
 from djmoney.models.fields import MoneyField
 
 
@@ -35,7 +37,7 @@ class Transaction(models.Model):
     amount = MoneyField(max_digits=10,
                         decimal_places=2,
                         default_currency="USD")
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateTimeField(default=datetime.now)
 
     class Meta:
         ordering = ["-date", "category"]

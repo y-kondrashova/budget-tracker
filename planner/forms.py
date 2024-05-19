@@ -14,7 +14,7 @@ class RegisterForm(UserCreationForm):
 class TransactionForm(forms.ModelForm):
     class Meta:
         model = Transaction
-        fields = ["transaction_type", "amount", "budget", "category"]
+        fields = ["transaction_type", "amount", "budget", "category", "date"]
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop("user")

@@ -1,6 +1,6 @@
 <ul>
   {% if user.is_authenticated %}
-    <li>Hello, {{ user.username }}</li>
+    <li>Hello, <a href="{% url 'planner:profile' user.id %}">{{ user.username }}</a></li>
     <li>
       <form method="post" action="{% url 'logout' %}">
         {% csrf_token %}

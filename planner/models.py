@@ -59,3 +59,35 @@ class Transaction(models.Model):
             self.budget.balance += self.amount
         self.budget.save()
         super(Transaction, self).delete(*args, **kwargs)
+
+
+class Transfer(models.Model):
+    from_budget = models.ForeignKey(Budget,
+                                    on_delete=models.CASCADE,
+                                    related_name="outcomes")
+    to_budget = models.ForeignKey(Budget,
+                                  on_delete=models.CASCADE,
+                                  related_name="incomes")
+    amount = MoneyField(max_digits=10,
+                        decimal_places=2,
+                        default_currency="USD")
+    date = models.DateTimeField(default=datetime.now)
+
+    class Meta:
+        ordering = ["-date"]
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.from_budget.balance -= self.amount
+            self.to_budget.balance += self.amount
+        self.from_budget.save()
+        self.to_budget.save()
+        super(Transfer, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        if not self.pk:
+            self.from_budget.balance += self.amount
+            self.to_budget.balance -= self.amount
+        self.from_budget.save()
+        self.to_budget.save()
+        super(Transfer, self).delete(*args, **kwargs)

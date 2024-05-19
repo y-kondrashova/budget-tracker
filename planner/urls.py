@@ -12,7 +12,8 @@ from planner.views import (
     CategoryDeleteView,
     CategoryUpdateView,
     TransactionCreateView,
-    TransactionListView
+    TransactionListView,
+    TransactionUpdateView,
 )
 
 urlpatterns = [
@@ -50,6 +51,11 @@ urlpatterns = [
         "transactions/create/",
         TransactionCreateView.as_view(),
         name="transaction-create"
+    ),
+    path(
+        "transactions/<int:pk>/update/",
+        TransactionUpdateView.as_view(),
+        name="transaction-update"
     ),
     path(
         "categories/create/",

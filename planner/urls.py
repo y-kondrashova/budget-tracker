@@ -18,12 +18,14 @@ from planner.views import (
     TransferListView,
     TransferCreateView,
     ProfileDetailView,
+    ProfileUpdateView,
 )
 
 urlpatterns = [
     path("", index, name="index"),
     path("register/", register, name="register"),
-    path("profile/<int:pk>/", ProfileDetailView.as_view(), name="profile"),
+    path("profile/", ProfileDetailView.as_view(), name="profile"),
+    path("profile/update/", ProfileUpdateView.as_view(), name="profile-update"),
     path("categories/", CategoryListView.as_view(), name="category-list"),
     path(
         "categories/create/",

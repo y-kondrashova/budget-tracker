@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
-from planner.forms import RegisterForm, TransactionForm
+from planner.forms import RegisterForm, TransactionForm, TransferForm
 from planner.models import Category, Budget, Transaction, Transfer
 
 
@@ -131,3 +131,18 @@ class TransferListView(LoginRequiredMixin, generic.ListView):
         "from_budget__owner",
         "to_budget__owner"
     )
+
+
+class TransferCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Transfer
+    form_class = TransferForm
+    success_url = reverse_lazy("planner:transfer-list")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["user"] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)

@@ -19,17 +19,17 @@ urlpatterns = [
     path("register/", register, name="register"),
     path("categories/", CategoryListView.as_view(), name="category-list"),
     path(
-        "categories/<int:pk>/update",
+        "categories/<int:pk>/update/",
         CategoryUpdateView.as_view(),
         name="category-update"
     ),
     path(
-        "categories/<int:pk>/delete",
+        "categories/<int:pk>/delete/",
         CategoryDeleteView.as_view(),
         name="category-delete"
     ),
     path("budgets/", BudgetListView.as_view(), name="budget-list"),
-    path("budgets/create", BudgetCreateView.as_view(), name="budget-create"),
+    path("budgets/create/", BudgetCreateView.as_view(), name="budget-create"),
     path(
         "budgets/<int:pk>/update/",
         BudgetUpdateView.as_view(),

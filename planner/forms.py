@@ -43,3 +43,14 @@ class TransferForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields["from_budget"].queryset = Budget.objects.filter(owner=user)
         self.fields["to_budget"].queryset = Budget.objects.filter(owner=user)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        from_budget = cleaned_data.get("from_budget")
+        to_budget = cleaned_data.get("to_budget")
+
+        if from_budget and to_budget:
+            if from_budget.balance.currency != to_budget.balance.currency:
+                raise forms.ValidationError("Both budgets must have the same currency for a transfer.")
+
+        return cleaned_data

@@ -51,6 +51,12 @@ class CategoryCreateView(LoginRequiredMixin, generic.CreateView):
         return super().form_valid(form)
 
 
+class CategoryUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Category
+    fields = ["title"]
+    success_url = reverse_lazy("planner:category-list")
+
+
 class BudgetListView(LoginRequiredMixin, generic.ListView):
     model = Budget
     context_object_name = "budget_list"

@@ -7,11 +7,13 @@
     <table class="table">
       <tr>
         <th>Title</th>
+        <th>Update</th>
       </tr>
       {% for category in category_list %}
         {% if category.owner.id == user.id %}
           <tr>
             <td>{{ category.title }}</td>
+            <th><a href="{% url 'planner:category-update' category.id %}">Update</a></th>
           </tr>
         {% endif %}
       {% endfor %}

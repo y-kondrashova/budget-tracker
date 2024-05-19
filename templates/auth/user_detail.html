@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Profile</h1>
+  <table class="table">
+    {% if user.first_name or user.last_name %}
+      <tr>
+        <th>Full name</th>
+        <td>{{ user.first_name }} {{ user.last_name }}</td>
+      </tr>
+    {% endif %}
+    <tr>
+      <th>Username</th>
+      <td>{{ user.username }}</td>
+    </tr>
+    <tr>
+      <th>Email</th>
+      <td>{{ user.email }}</td>
+    </tr>
+    <tr>
+      <th>Date joined</th>
+      <td>{{ user.date_joined }}</td>
+    </tr>
+  </table>
+{% endblock %}

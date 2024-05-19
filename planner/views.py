@@ -110,3 +110,9 @@ class TransactionCreateView(LoginRequiredMixin, generic.CreateView):
     def form_valid(self, form):
         form.instance.owner = self.request.user
         return super().form_valid(form)
+
+
+class TransactionUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Transaction
+    fields = "__all__"
+    success_url = reverse_lazy("planner:transaction-list")

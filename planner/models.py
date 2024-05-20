@@ -44,13 +44,20 @@ class Transaction(models.Model):
         ordering = ["-date", "category"]
 
     def save(self, *args, **kwargs):
-        if not self.pk:
-            if self.transaction_type == "Income":
-                self.budget.balance += self.amount
-            elif self.transaction_type == "Outcome":
-                self.budget.balance -= self.amount
+        if self.pk:
+            old_transaction = Transaction.objects.get(pk=self.pk)
+            if old_transaction.transaction_type == "Income":
+                self.budget.balance -= old_transaction.amount
+            elif old_transaction.transaction_type == "Outcome":
+                self.budget.balance += old_transaction.amount
+
+        if self.transaction_type == "Income":
+            self.budget.balance += self.amount
+        elif self.transaction_type == "Outcome":
+            self.budget.balance -= self.amount
+
         self.budget.save()
-        super(Transaction, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
         if self.transaction_type == "Income":
@@ -77,12 +84,19 @@ class Transfer(models.Model):
         ordering = ["-date"]
 
     def save(self, *args, **kwargs):
-        if not self.pk:
-            self.from_budget.balance -= self.amount
-            self.to_budget.balance += self.amount
+        if self.pk:
+            old_transfer = Transfer.objects.get(pk=self.pk)
+            self.from_budget.balance += old_transfer.amount
+            self.to_budget.balance -= old_transfer.amount
+
+            old_transfer.from_budget.save()
+            old_transfer.to_budget.save()
+
+        self.from_budget.balance -= self.amount
+        self.to_budget.balance += self.amount
         self.from_budget.save()
         self.to_budget.save()
-        super(Transfer, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
         if not self.pk:

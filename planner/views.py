@@ -132,8 +132,13 @@ class TransactionCreateView(LoginRequiredMixin, generic.CreateView):
 
 class TransactionUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Transaction
-    fields = "__all__"
+    form_class = TransactionForm
     success_url = reverse_lazy("planner:transaction-list")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["user"] = self.request.user
+        return kwargs
 
 
 class TransactionDeleteView(LoginRequiredMixin, generic.DeleteView):

@@ -11,6 +11,7 @@
         <th>Amount</th>
         <th>Date</th>
         <th>Update</th>
+        <th>Delete</th>
       </tr>
       {% for transfer in transfer_list %}
         {% if transfer.from_budget.owner.id == user.id and transfer.to_budget.owner.id == user.id %}
@@ -19,7 +20,8 @@
             <td>{{ transfer.to_budget.title }}</td>
             <td>{{ transfer.amount }}</td>
             <td>{{ transfer.date }}</td>
-          <td><a href="{% url 'planner:transfer-update' transfer.id %}">Update</a></td>
+            <td><a href="{% url 'planner:transfer-update' transfer.id %}">Update</a></td>
+            <td><a href="{% url 'planner:transfer-delete' transfer.id %}">Delete</a></td>
           </tr>
         {% endif %}
       {% endfor %}

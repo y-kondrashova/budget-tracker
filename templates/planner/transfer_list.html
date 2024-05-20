@@ -2,7 +2,9 @@
 
 {% block content %}
   <h1>Transfer list</h1>
-  <a href="{% url 'planner:transfer-create' %}">Create new transfer</a>
+  <p>
+    <a class="btn btn-success" href="{% url 'planner:transfer-create' %}">Create new transfer</a>
+  </p>
   {% if transfer_list %}
     <table class="table">
       <tr>
@@ -20,8 +22,8 @@
             <td>{{ transfer.to_budget.title }}</td>
             <td>{{ transfer.amount }}</td>
             <td>{{ transfer.date }}</td>
-            <td><a href="{% url 'planner:transfer-update' transfer.id %}">Update</a></td>
-            <td><a href="{% url 'planner:transfer-delete' transfer.id %}">Delete</a></td>
+            <td><a class="btn btn-primary" href="{% url 'planner:transfer-update' transfer.id %}">Update</a></td>
+            <td><a class="btn btn-danger" href="{% url 'planner:transfer-delete' transfer.id %}">Delete</a></td>
           </tr>
         {% endif %}
       {% endfor %}

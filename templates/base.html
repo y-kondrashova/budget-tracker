@@ -12,10 +12,18 @@
   <title>{% block title %}Planner{% endblock %}</title>
 </head>
 <body>
-{% block sidebar %}
-  {% include 'includes/sidebar.html' %}
-{% endblock %}
-{% block content %}{% endblock %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-2">
+      {% block sidebar %}
+        {% include "includes/sidebar.html" %}
+      {% endblock %}
+    </div>
+    <div class="col-sm-10 ">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+</div>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

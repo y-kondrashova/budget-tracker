@@ -2,7 +2,9 @@
 
 {% block content %}
   <h1>Category list</h1>
-  <a href="{% url 'planner:category-create' %}">Create new category</a>
+  <p>
+    <a class="btn btn-success" href="{% url 'planner:category-create' %}">Create new category</a>
+  </p>
   {% if category_list %}
     <table class="table">
       <tr>
@@ -14,8 +16,8 @@
         {% if category.owner.id == user.id %}
           <tr>
             <td>{{ category.title }}</td>
-            <td><a href="{% url 'planner:category-update' category.id %}">Update</a></td>
-            <td><a href="{% url 'planner:category-delete' category.id %}">Delete</a></td>
+            <td><a class="btn btn-primary" href="{% url 'planner:category-update' category.id %}">Update</a></td>
+            <td><a class="btn btn-danger" href="{% url 'planner:category-delete' category.id %}">Delete</a></td>
           </tr>
         {% endif %}
       {% endfor %}

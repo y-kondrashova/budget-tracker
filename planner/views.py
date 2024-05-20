@@ -180,3 +180,8 @@ class TransferUpdateView(LoginRequiredMixin, generic.UpdateView):
         kwargs = super().get_form_kwargs()
         kwargs["user"] = self.request.user
         return kwargs
+
+
+class TransferDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Transfer
+    success_url = reverse_lazy("planner:transfer-list")

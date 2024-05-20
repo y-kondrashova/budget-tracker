@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from planner.models import Budget, Transaction, Transfer
+from planner.models import Budget, Transaction, Transfer, Category
 
 
 class RegisterForm(UserCreationForm):
@@ -20,6 +20,7 @@ class TransactionForm(forms.ModelForm):
         user = kwargs.pop("user")
         super().__init__(*args, **kwargs)
         self.fields["budget"].queryset = Budget.objects.filter(owner=user)
+        self.fields["category"].queryset = Category.objects.filter(owner=user)
 
     def clean(self):
         cleaned_data = super().clean()

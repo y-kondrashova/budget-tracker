@@ -78,6 +78,7 @@ class CategoryListView(LoginRequiredMixin, generic.ListView):
     context_object_name = "category_list"
     template_name = "planner/category_list.html"
     queryset = Category.objects.select_related("owner")
+    paginate_by = 10
 
 
 class CategoryCreateView(LoginRequiredMixin, generic.CreateView):
@@ -106,6 +107,7 @@ class BudgetListView(LoginRequiredMixin, generic.ListView):
     context_object_name = "budget_list"
     template_name = "planner/budget_list.html"
     queryset = Budget.objects.select_related("owner")
+    paginate_by = 10
 
 
 class BudgetCreateView(LoginRequiredMixin, generic.CreateView):
@@ -134,6 +136,7 @@ class TransactionListView(BaseListViewWithDateSearch):
     context_object_name = "transaction_list"
     template_name = "planner/transaction_list.html"
     queryset = Transaction.objects.select_related("budget__owner", "category")
+    paginate_by = 10
 
 
 class TransactionCreateView(LoginRequiredMixin, generic.CreateView):
@@ -175,6 +178,7 @@ class TransferListView(BaseListViewWithDateSearch):
         "from_budget__owner",
         "to_budget__owner"
     )
+    paginate_by = 10
 
 
 class TransferCreateView(LoginRequiredMixin, generic.CreateView):

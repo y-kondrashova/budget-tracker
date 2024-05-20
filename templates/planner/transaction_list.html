@@ -4,6 +4,7 @@
   <h1>Transaction list</h1>
   <p>
     <a class="btn btn-success" href="{% url 'planner:transaction-create' %}">Create new transaction</a>
+    {% include "includes/search_form.html" %}
   </p>
   {% if transaction_list %}
     <table class="table">

@@ -4,6 +4,7 @@
   <h1>Transfer list</h1>
   <p>
     <a class="btn btn-success" href="{% url 'planner:transfer-create' %}">Create new transfer</a>
+    {% include "includes/search_form.html" %}
   </p>
   {% if transfer_list %}
     <table class="table">

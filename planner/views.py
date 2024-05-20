@@ -169,3 +169,14 @@ class TransferCreateView(LoginRequiredMixin, generic.CreateView):
     def form_valid(self, form):
         form.instance.owner = self.request.user
         return super().form_valid(form)
+
+
+class TransferUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Transfer
+    form_class = TransferForm
+    success_url = reverse_lazy("planner:transfer-list")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["user"] = self.request.user
+        return kwargs

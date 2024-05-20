@@ -2,7 +2,9 @@
 
 {% block content %}
   <h1>Transaction list</h1>
-  <a href="{% url 'planner:transaction-create' %}">Create new transaction</a>
+  <p>
+    <a class="btn btn-success" href="{% url 'planner:transaction-create' %}">Create new transaction</a>
+  </p>
   {% if transaction_list %}
     <table class="table">
       <tr>
@@ -24,8 +26,8 @@
             <td>{{ transaction.date }}</td>
             <td>{{ transaction.category.title }}</td>
             <td>{{ transaction.budget.title }}</td>
-            <td><a href="{% url 'planner:transaction-update' transaction.id %}">Update</a></td>
-            <td><a href="{% url 'planner:transaction-delete' transaction.id %}">Delete</a></td>
+            <td><a class="btn btn-primary" href="{% url 'planner:transaction-update' transaction.id %}">Update</a></td>
+            <td><a class="btn btn-danger" href="{% url 'planner:transaction-delete' transaction.id %}">Delete</a></td>
           </tr>
         {% endif %}
       {% endfor %}

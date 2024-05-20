@@ -7,7 +7,12 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
-from planner.forms import RegisterForm, TransactionForm, TransferForm, DateSearchForm
+from planner.forms import (
+    RegisterForm,
+    TransactionForm,
+    TransferForm,
+    DateSearchForm,
+)
 from planner.models import Category, Budget, Transaction, Transfer
 
 

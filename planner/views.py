@@ -7,8 +7,29 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
-from planner.forms import RegisterForm, TransactionForm, TransferForm
+from planner.forms import RegisterForm, TransactionForm, TransferForm, DateSearchForm
 from planner.models import Category, Budget, Transaction, Transfer
+
+
+class BaseListViewWithDateSearch(LoginRequiredMixin, generic.ListView):
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        form = DateSearchForm(self.request.GET)
+        context["search_form"] = form
+        return context
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        form = DateSearchForm(self.request.GET)
+        if form.is_valid():
+            start_date = form.cleaned_data.get("start_date")
+            end_date = form.cleaned_data.get("end_date")
+            if start_date:
+                queryset = queryset.filter(date__gte=start_date)
+            if end_date:
+                queryset = queryset.filter(date__lte=end_date)
+        return queryset
 
 
 def index(request):
@@ -108,7 +129,7 @@ class BudgetDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("planner:budget-list")
 
 
-class TransactionListView(LoginRequiredMixin, generic.ListView):
+class TransactionListView(BaseListViewWithDateSearch):
     model = Transaction
     context_object_name = "transaction_list"
     template_name = "planner/transaction_list.html"
@@ -146,7 +167,7 @@ class TransactionDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("planner:transaction-list")
 
 
-class TransferListView(LoginRequiredMixin, generic.ListView):
+class TransferListView(BaseListViewWithDateSearch):
     model = Transfer
     context_object_name = "transfer_list"
     template_name = "planner/transfer_list.html"

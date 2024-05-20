@@ -18,6 +18,7 @@ from planner.views import (
     TransferListView,
     TransferCreateView,
     TransferUpdateView,
+    TransferDeleteView,
     ProfileDetailView,
     ProfileUpdateView,
 )
@@ -89,6 +90,11 @@ urlpatterns = [
         "transfers/<int:pk>/update/",
         TransferUpdateView.as_view(),
         name="transfer-update"
+    ),
+    path(
+        "transfers/<int:pk>/delete/",
+        TransferDeleteView.as_view(),
+        name="transfer-delete"
     )
 ]
 

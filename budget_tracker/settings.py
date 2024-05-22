@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "django.contrib.staticfiles",
     "djmoney",
     "crispy_forms",
     "crispy_bootstrap4",
@@ -105,7 +104,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
-WSGI_APPLICATION = "application"
+WSGI_APPLICATION = "budget_tracker.wsgi.application"
 
 
 # Database

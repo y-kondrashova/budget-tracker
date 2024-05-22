@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "djmoney",
-    "debug_toolbar",
     "crispy_forms",
     "crispy_bootstrap4",
     "planner",

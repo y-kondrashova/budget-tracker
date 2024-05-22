@@ -1,0 +1,471 @@
+[
+{
+    "model": "planner.budget",
+    "pk": 1,
+    "fields": {
+        "owner": 1,
+        "title": "pocket",
+        "balance_currency": "USD",
+        "balance": "680.00"
+    }
+},
+{
+    "model": "planner.budget",
+    "pk": 2,
+    "fields": {
+        "owner": 1,
+        "title": "saving",
+        "balance_currency": "USD",
+        "balance": "165.00"
+    }
+},
+{
+    "model": "planner.category",
+    "pk": 1,
+    "fields": {
+        "title": "food",
+        "owner": 1
+    }
+},
+{
+    "model": "planner.category",
+    "pk": 2,
+    "fields": {
+        "title": "salary",
+        "owner": 1
+    }
+},
+{
+    "model": "planner.category",
+    "pk": 3,
+    "fields": {
+        "title": "rent",
+        "owner": 1
+    }
+},
+{
+    "model": "planner.transaction",
+    "pk": 1,
+    "fields": {
+        "budget": 1,
+        "category": 2,
+        "transaction_type": "Income",
+        "amount_currency": "USD",
+        "amount": "1000.00",
+        "date": "2024-05-02T18:14:04Z"
+    }
+},
+{
+    "model": "planner.transaction",
+    "pk": 2,
+    "fields": {
+        "budget": 1,
+        "category": 1,
+        "transaction_type": "Outcome",
+        "amount_currency": "USD",
+        "amount": "20.00",
+        "date": "2024-05-03T18:14:45Z"
+    }
+},
+{
+    "model": "planner.transaction",
+    "pk": 3,
+    "fields": {
+        "budget": 1,
+        "category": 3,
+        "transaction_type": "Outcome",
+        "amount_currency": "USD",
+        "amount": "300.00",
+        "date": "2024-05-10T18:15:03Z"
+    }
+},
+{
+    "model": "planner.transfer",
+    "pk": 1,
+    "fields": {
+        "from_budget": 1,
+        "to_budget": 2,
+        "amount_currency": "USD",
+        "amount": "150.00",
+        "date": "2024-05-10T18:15:48Z"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 1,
+    "fields": {
+        "name": "Can add log entry",
+        "content_type": 1,
+        "codename": "add_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 2,
+    "fields": {
+        "name": "Can change log entry",
+        "content_type": 1,
+        "codename": "change_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 3,
+    "fields": {
+        "name": "Can delete log entry",
+        "content_type": 1,
+        "codename": "delete_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 4,
+    "fields": {
+        "name": "Can view log entry",
+        "content_type": 1,
+        "codename": "view_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 5,
+    "fields": {
+        "name": "Can add permission",
+        "content_type": 2,
+        "codename": "add_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 6,
+    "fields": {
+        "name": "Can change permission",
+        "content_type": 2,
+        "codename": "change_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 7,
+    "fields": {
+        "name": "Can delete permission",
+        "content_type": 2,
+        "codename": "delete_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 8,
+    "fields": {
+        "name": "Can view permission",
+        "content_type": 2,
+        "codename": "view_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 9,
+    "fields": {
+        "name": "Can add group",
+        "content_type": 3,
+        "codename": "add_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 10,
+    "fields": {
+        "name": "Can change group",
+        "content_type": 3,
+        "codename": "change_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 11,
+    "fields": {
+        "name": "Can delete group",
+        "content_type": 3,
+        "codename": "delete_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 12,
+    "fields": {
+        "name": "Can view group",
+        "content_type": 3,
+        "codename": "view_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 13,
+    "fields": {
+        "name": "Can add user",
+        "content_type": 4,
+        "codename": "add_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 14,
+    "fields": {
+        "name": "Can change user",
+        "content_type": 4,
+        "codename": "change_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 15,
+    "fields": {
+        "name": "Can delete user",
+        "content_type": 4,
+        "codename": "delete_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 16,
+    "fields": {
+        "name": "Can view user",
+        "content_type": 4,
+        "codename": "view_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 17,
+    "fields": {
+        "name": "Can add content type",
+        "content_type": 5,
+        "codename": "add_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 18,
+    "fields": {
+        "name": "Can change content type",
+        "content_type": 5,
+        "codename": "change_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 19,
+    "fields": {
+        "name": "Can delete content type",
+        "content_type": 5,
+        "codename": "delete_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 20,
+    "fields": {
+        "name": "Can view content type",
+        "content_type": 5,
+        "codename": "view_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 21,
+    "fields": {
+        "name": "Can add session",
+        "content_type": 6,
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 22,
+    "fields": {
+        "name": "Can change session",
+        "content_type": 6,
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 23,
+    "fields": {
+        "name": "Can delete session",
+        "content_type": 6,
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 24,
+    "fields": {
+        "name": "Can view session",
+        "content_type": 6,
+        "codename": "view_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+        "name": "Can add budget",
+        "content_type": 7,
+        "codename": "add_budget"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+        "name": "Can change budget",
+        "content_type": 7,
+        "codename": "change_budget"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+        "name": "Can delete budget",
+        "content_type": 7,
+        "codename": "delete_budget"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+        "name": "Can view budget",
+        "content_type": 7,
+        "codename": "view_budget"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 29,
+    "fields": {
+        "name": "Can add category",
+        "content_type": 8,
+        "codename": "add_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 30,
+    "fields": {
+        "name": "Can change category",
+        "content_type": 8,
+        "codename": "change_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 31,
+    "fields": {
+        "name": "Can delete category",
+        "content_type": 8,
+        "codename": "delete_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 32,
+    "fields": {
+        "name": "Can view category",
+        "content_type": 8,
+        "codename": "view_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 33,
+    "fields": {
+        "name": "Can add transaction",
+        "content_type": 9,
+        "codename": "add_transaction"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 34,
+    "fields": {
+        "name": "Can change transaction",
+        "content_type": 9,
+        "codename": "change_transaction"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 35,
+    "fields": {
+        "name": "Can delete transaction",
+        "content_type": 9,
+        "codename": "delete_transaction"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 36,
+    "fields": {
+        "name": "Can view transaction",
+        "content_type": 9,
+        "codename": "view_transaction"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 37,
+    "fields": {
+        "name": "Can add transfer",
+        "content_type": 10,
+        "codename": "add_transfer"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 38,
+    "fields": {
+        "name": "Can change transfer",
+        "content_type": 10,
+        "codename": "change_transfer"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 39,
+    "fields": {
+        "name": "Can delete transfer",
+        "content_type": 10,
+        "codename": "delete_transfer"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 40,
+    "fields": {
+        "name": "Can view transfer",
+        "content_type": 10,
+        "codename": "view_transfer"
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$720000$9jBaRgjVZafw2FH6BbiLLA$ZcVipCDsXnDu8TIFukt33a+Wo4mAWnO3mSgq8nOMouQ=",
+        "last_login": "2024-05-21T15:12:41.183Z",
+        "is_superuser": false,
+        "username": "alise",
+        "first_name": "Alise",
+        "last_name": "Doe",
+        "email": "alise@mail.co",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-05-21T15:12:40.429Z",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

@@ -37,7 +37,7 @@ SECRET_KEY = os.environ.get(
 
 DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
 
-ALLOWED_HOSTS = ["https://budget-tracker-os6u.onrender.com"]
+ALLOWED_HOSTS = []
 
 
 # Application definition

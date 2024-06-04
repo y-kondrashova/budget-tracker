@@ -53,11 +53,14 @@ class TransferForm(forms.ModelForm):
         from_budget = cleaned_data.get("from_budget")
         to_budget = cleaned_data.get("to_budget")
 
-        if from_budget and to_budget:
-            if from_budget.balance.currency != to_budget.balance.currency:
-                raise forms.ValidationError(
-                    "Both budgets must have the same currency for a transfer."
-                )
+        if (
+            from_budget
+            and to_budget
+            and from_budget.balance.currency != to_budget.balance.currency
+        ):
+            raise forms.ValidationError(
+                "Both budgets must have the same currency for a transfer."
+            )
 
         return cleaned_data
 

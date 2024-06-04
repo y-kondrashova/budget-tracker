@@ -54,12 +54,12 @@ def register(request) -> HttpResponse:
             messages.success(request, "You have singed up successfully.")
             login(request, user)
             return redirect("planner:index")
-        else:
-            return render(
-                request,
-                "registration/register.html",
-                {"form": form}
-            )
+
+        return render(
+            request,
+            "registration/register.html",
+            {"form": form}
+        )
 
 
 class ProfileDetailView(LoginRequiredMixin, generic.DetailView):

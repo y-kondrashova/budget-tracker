@@ -3,6 +3,7 @@ from datetime import datetime
 from django.contrib.auth.models import AbstractUser, User
 from django.db import models
 from djmoney.models.fields import MoneyField
+from django.utils.translation import gettext_lazy as _
 
 
 class Budget(models.Model):
@@ -30,16 +31,16 @@ class Category(models.Model):
 
 
 class Transaction(models.Model):
-    type_choices = (
-        ("Income", "Income"),
-        ("Outcome", "Outcome"),
-    )
+    class TransactionType(models.TextChoices):
+        INCOME = 'Income', _('Income')
+        OUTCOME = 'Outcome', _('Outcome')
+
     budget = models.ForeignKey(Budget, on_delete=models.CASCADE)
     category = models.ForeignKey(Category,
                                  on_delete=models.SET_NULL,
                                  null=True,
                                  related_name="transactions")
-    transaction_type = models.CharField(max_length=50, choices=type_choices)
+    transaction_type = models.CharField(max_length=50, choices=TransactionType.choices)
     amount = MoneyField(max_digits=10,
                         decimal_places=2,
                         default_currency="USD")

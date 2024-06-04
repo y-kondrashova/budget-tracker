@@ -6,7 +6,9 @@ from djmoney.models.fields import MoneyField
 
 
 class Budget(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User,
+                              on_delete=models.CASCADE,
+                              related_name="budgets")
     title = models.CharField(max_length=100)
     balance = MoneyField(max_digits=10,
                          decimal_places=2,
@@ -19,7 +21,9 @@ class Budget(models.Model):
 
 class Category(models.Model):
     title = models.CharField(max_length=100)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User,
+                              on_delete=models.CASCADE,
+                              related_name="categories")
 
     def __str__(self):
         return self.title
@@ -33,7 +37,8 @@ class Transaction(models.Model):
     budget = models.ForeignKey(Budget, on_delete=models.CASCADE)
     category = models.ForeignKey(Category,
                                  on_delete=models.SET_NULL,
-                                 null=True)
+                                 null=True,
+                                 related_name="transactions")
     transaction_type = models.CharField(max_length=50, choices=type_choices)
     amount = MoneyField(max_digits=10,
                         decimal_places=2,

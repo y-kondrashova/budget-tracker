@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>index page</h1>
-  <p>Later you will see the graphs here</p>
+  <h1>Planner</h1>
+  <h4>Hello, and welcome to Planner app</h4>
+  <p>This app will help you to manage your budgets. You can keep your spending data from different bank accounts and
+    your cash spending in one place.</p>
+  <p>You can create Categories and Budgets and make Transfers and Transactions with them.</p>
+  <p>If you forgot to make your transfer in moment of spending, don't worry date is editable here, just choose date and
+    time you need.</p>
+  <p>You can have a negative balance in your budget which will represent your credits</p>
+  {% if not user.is_authenticated %}
+    <p><strong>To use app, please, login or register</strong></p>
+  {% endif %}
 {% endblock %}

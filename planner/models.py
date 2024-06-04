@@ -65,23 +65,23 @@ class Transaction(models.Model):
     def save(self, *args, **kwargs):
         if self.pk:
             old_transaction = Transaction.objects.get(pk=self.pk)
-            if old_transaction.transaction_type == "Income":
+            if old_transaction.transaction_type == self.TransactionType.INCOME:
                 self.budget.balance -= old_transaction.amount
-            elif old_transaction.transaction_type == "Outcome":
+            elif old_transaction.transaction_type == self.TransactionType.OUTCOME:
                 self.budget.balance += old_transaction.amount
 
-        if self.transaction_type == "Income":
+        if self.transaction_type == self.TransactionType.INCOME:
             self.budget.balance += self.amount
-        elif self.transaction_type == "Outcome":
+        elif self.transaction_type == self.TransactionType.OUTCOME:
             self.budget.balance -= self.amount
 
         self.budget.save()
         super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
-        if self.transaction_type == "Income":
+        if self.transaction_type == self.TransactionType.INCOME:
             self.budget.balance -= self.amount
-        elif self.transaction_type == "Outcome":
+        elif self.transaction_type == self.TransactionType.OUTCOME:
             self.budget.balance += self.amount
         self.budget.save()
         super(Transaction, self).delete(*args, **kwargs)

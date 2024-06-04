@@ -2,19 +2,23 @@ from datetime import datetime
 
 from django.contrib.auth.models import AbstractUser, User
 from django.db import models
-from djmoney.models.fields import MoneyField
 from django.utils.translation import gettext_lazy as _
+from djmoney.models.fields import MoneyField
 
 
 class Budget(models.Model):
-    owner = models.ForeignKey(User,
-                              on_delete=models.CASCADE,
-                              related_name="budgets")
+    owner = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="budgets"
+    )
     title = models.CharField(max_length=100)
-    balance = MoneyField(max_digits=10,
-                         decimal_places=2,
-                         null=True,
-                         default_currency="USD")
+    balance = MoneyField(
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        default_currency="USD"
+    )
 
     def __str__(self):
         return f"{self.title} (balance: {self.balance})"
@@ -22,9 +26,11 @@ class Budget(models.Model):
 
 class Category(models.Model):
     title = models.CharField(max_length=100)
-    owner = models.ForeignKey(User,
-                              on_delete=models.CASCADE,
-                              related_name="categories")
+    owner = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="categories"
+    )
 
     def __str__(self):
         return self.title
@@ -36,14 +42,21 @@ class Transaction(models.Model):
         OUTCOME = 'Outcome', _('Outcome')
 
     budget = models.ForeignKey(Budget, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category,
-                                 on_delete=models.SET_NULL,
-                                 null=True,
-                                 related_name="transactions")
-    transaction_type = models.CharField(max_length=50, choices=TransactionType.choices)
-    amount = MoneyField(max_digits=10,
-                        decimal_places=2,
-                        default_currency="USD")
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="transactions"
+    )
+    transaction_type = models.CharField(
+        max_length=50,
+        choices=TransactionType.choices
+    )
+    amount = MoneyField(
+        max_digits=10,
+        decimal_places=2,
+        default_currency="USD"
+    )
     date = models.DateTimeField(default=datetime.now)
 
     class Meta:
@@ -75,15 +88,21 @@ class Transaction(models.Model):
 
 
 class Transfer(models.Model):
-    from_budget = models.ForeignKey(Budget,
-                                    on_delete=models.CASCADE,
-                                    related_name="outcomes")
-    to_budget = models.ForeignKey(Budget,
-                                  on_delete=models.CASCADE,
-                                  related_name="incomes")
-    amount = MoneyField(max_digits=10,
-                        decimal_places=2,
-                        default_currency="USD")
+    from_budget = models.ForeignKey(
+        Budget,
+        on_delete=models.CASCADE,
+        related_name="outcomes"
+    )
+    to_budget = models.ForeignKey(
+        Budget,
+        on_delete=models.CASCADE,
+        related_name="incomes"
+    )
+    amount = MoneyField(
+        max_digits=10,
+        decimal_places=2,
+        default_currency="USD"
+    )
     date = models.DateTimeField(default=datetime.now)
 
     class Meta:

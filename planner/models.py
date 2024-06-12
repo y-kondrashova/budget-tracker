@@ -1,9 +1,11 @@
 from datetime import datetime
 
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from djmoney.models.fields import MoneyField
+from moneyed import Money
 
 User = get_user_model()
 
@@ -80,6 +82,14 @@ class Transfer(models.Model):
 
     class Meta:
         ordering = ["-date"]
+
+    def clean(self):
+        if self.from_budget == self.to_budget:
+            raise ValidationError("From and To budgets cannot be the same.")
+        if self.amount <= Money(0, self.amount.currency):
+            raise ValidationError("Transfer amount must be greater than zero.")
+        if self.from_budget.balance < self.amount:
+            raise ValidationError("Insufficient funds in the source budget.")
 
     def save(self, *args, **kwargs):
         if self.pk:

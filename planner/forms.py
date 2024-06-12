@@ -1,8 +1,10 @@
 from django import forms
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 
 from planner.models import Budget, Transaction, Transfer, Category
+
+User = get_user_model()
 
 
 class RegisterForm(UserCreationForm):
@@ -30,8 +32,7 @@ class TransactionForm(forms.ModelForm):
         if budget and amount:
             if budget.balance.currency != amount.currency:
                 raise forms.ValidationError(
-                    "The budget and transaction amount "
-                    "must have the same currency."
+                    "The budget and transaction amount " "must have the same currency."
                 )
 
         return cleaned_data
@@ -67,10 +68,8 @@ class TransferForm(forms.ModelForm):
 
 class DateSearchForm(forms.Form):
     start_date = forms.DateField(
-        widget=forms.DateInput(attrs={"type": "date"}),
-        required=False
+        widget=forms.DateInput(attrs={"type": "date"}), required=False
     )
     end_date = forms.DateField(
-        widget=forms.DateInput(attrs={"type": "date"}),
-        required=False
+        widget=forms.DateInput(attrs={"type": "date"}), required=False
     )

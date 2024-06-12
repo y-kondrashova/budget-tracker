@@ -6,14 +6,34 @@ used efficiently and effectively
 
 ## Installation
 
-```shell
-git clone https://github.com/y-kondrashova/budget-tracker.git
-cd budget-tracker
-python3 -m venv venv
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py runserver
-```
+1. Clone the repo:
+    ```shell
+    git clone https://github.com/y-kondrashova/budget-tracker.git
+    ```
+2. Change working directory:
+    ```shell
+   cd budget-tracker
+   ```
+3. Create virtual environment:
+   ```shell
+    python3 -m venv venv
+    ```
+4. Activate virtual environment:
+    ```shell
+    source venv/bin/activate
+    ```
+5. Install requirements:
+   ```shell
+   pip install -r requirements.txt
+   ```
+6. Run migrations:
+   ```shell
+   python manage.py migrate
+   ```
+7. Run server:
+   ```shell
+   python manage.py runserver
+   ```
 
 ## Features
 

@@ -32,7 +32,8 @@ class TransactionForm(forms.ModelForm):
         if budget and amount:
             if budget.balance.currency != amount.currency:
                 raise forms.ValidationError(
-                    "The budget and transaction amount " "must have the same currency."
+                    "The budget and transaction amount "
+                    "must have the same currency."
                 )
 
         return cleaned_data

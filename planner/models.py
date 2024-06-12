@@ -11,7 +11,9 @@ User = get_user_model()
 
 
 class Budget(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="budgets")
+    owner = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="budgets"
+    )
     title = models.CharField(max_length=100)
     balance = MoneyField(
         max_digits=10, decimal_places=2, null=True, default_currency="USD"
@@ -23,7 +25,9 @@ class Budget(models.Model):
 
 class Category(models.Model):
     title = models.CharField(max_length=100)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="categories")
+    owner = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="categories"
+    )
 
     def __str__(self):
         return self.title
@@ -36,10 +40,17 @@ class Transaction(models.Model):
 
     budget = models.ForeignKey(Budget, on_delete=models.CASCADE)
     category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, null=True, related_name="transactions"
+        Category,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="transactions"
     )
-    transaction_type = models.CharField(max_length=50, choices=TransactionType.choices)
-    amount = MoneyField(max_digits=10, decimal_places=2, default_currency="USD")
+    transaction_type = models.CharField(
+        max_length=50, choices=TransactionType.choices
+    )
+    amount = MoneyField(
+        max_digits=10, decimal_places=2, default_currency="USD"
+    )
     date = models.DateTimeField(default=datetime.now)
 
     class Meta:
@@ -50,7 +61,8 @@ class Transaction(models.Model):
             old_transaction = Transaction.objects.get(pk=self.pk)
             if old_transaction.transaction_type == self.TransactionType.INCOME:
                 self.budget.balance -= old_transaction.amount
-            elif old_transaction.transaction_type == self.TransactionType.OUTCOME:
+            elif (old_transaction.transaction_type
+                  == self.TransactionType.OUTCOME):
                 self.budget.balance += old_transaction.amount
 
         if self.transaction_type == self.TransactionType.INCOME:
@@ -77,7 +89,9 @@ class Transfer(models.Model):
     to_budget = models.ForeignKey(
         Budget, on_delete=models.CASCADE, related_name="incomes"
     )
-    amount = MoneyField(max_digits=10, decimal_places=2, default_currency="USD")
+    amount = MoneyField(
+        max_digits=10, decimal_places=2, default_currency="USD"
+    )
     date = models.DateTimeField(default=datetime.now)
 
     class Meta:

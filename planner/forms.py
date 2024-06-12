@@ -30,12 +30,20 @@ class TransactionForm(forms.ModelForm):
         cleaned_data = super().clean()
         budget = cleaned_data.get("budget")
         amount = cleaned_data.get("amount")
+        total_digits = len(
+            str(amount).replace('.', '').replace(',', '')
+        )
 
         if budget and amount:
             if budget.balance.currency != amount.currency:
                 raise forms.ValidationError(
                     "The budget and transaction amount "
                     "must have the same currency."
+                )
+            if total_digits > 10:
+                raise ValidationError(
+                    "The total number of digits in the amount"
+                    " must not exceed 10."
                 )
 
         return cleaned_data
@@ -57,6 +65,9 @@ class TransferForm(forms.ModelForm):
         from_budget = cleaned_data.get("from_budget")
         to_budget = cleaned_data.get("to_budget")
         amount = cleaned_data.get("amount")
+        total_digits = len(
+            str(amount).replace('.', '').replace(',', '')
+        )
 
         if (
             from_budget
@@ -72,6 +83,10 @@ class TransferForm(forms.ModelForm):
             raise ValidationError("Transfer amount must be greater than zero.")
         if from_budget.balance < amount:
             raise ValidationError("Insufficient funds in the source budget.")
+        if total_digits > 10:
+            raise ValidationError(
+                "The total number of digits in the amount must not exceed 10."
+            )
 
         return cleaned_data
 

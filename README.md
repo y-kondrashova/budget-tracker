@@ -11,6 +11,7 @@ git clone https://github.com/y-kondrashova/budget-tracker.git
 cd budget-tracker
 python3 -m venv venv
 pip install -r requirements.txt
+python manage.py migrate
 python manage.py runserver
 ```
 

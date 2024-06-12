@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
+from django.core.exceptions import ValidationError
+from moneyed import Money
 
 from planner.models import Budget, Transaction, Transfer, Category
 
@@ -54,6 +56,7 @@ class TransferForm(forms.ModelForm):
         cleaned_data = super().clean()
         from_budget = cleaned_data.get("from_budget")
         to_budget = cleaned_data.get("to_budget")
+        amount = cleaned_data.get("amount")
 
         if (
             from_budget
@@ -63,6 +66,12 @@ class TransferForm(forms.ModelForm):
             raise forms.ValidationError(
                 "Both budgets must have the same currency for a transfer."
             )
+        if from_budget == to_budget:
+            raise ValidationError("From and To budgets cannot be the same.")
+        if amount <= Money(0, amount.currency):
+            raise ValidationError("Transfer amount must be greater than zero.")
+        if from_budget.balance < amount:
+            raise ValidationError("Insufficient funds in the source budget.")
 
         return cleaned_data
 

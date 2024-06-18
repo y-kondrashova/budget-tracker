@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Budget list</h1>
+  <p>
+    <a class="btn btn-success" href="{% url 'planner:budget-create' %}">Create a new budget</a>
+  </p>
+
+  {% if budget_list %}
+    <table class="table">
+      <tr>
+        <th>Title</th>
+        <th>Balance</th>
+        <th>Currency</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+      {% for budget in budget_list %}
+        {% if budget.owner.id == user.id %}
+          <tr>
+            <td>{{ budget.title }}</td>
+            <td>{{ budget.balance }}</td>
+            <td>{{ budget.balance_currency }}</td>
+            <td><a class="btn btn-primary" href="{% url 'planner:budget-update' budget.id %}">Update</a></td>
+            <td><a class="btn btn-danger" href="{% url 'planner:budget-delete' budget.id %}">Delete</a></td>
+          </tr>
+        {% endif %}
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>There's no budget to display</p>
+  {% endif %}
+{% endblock %}

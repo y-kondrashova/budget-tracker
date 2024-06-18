@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Transfer list</h1>
+  <p>
+    <a class="btn btn-success" href="{% url 'planner:transfer-create' %}">Create new transfer</a>
+    {% include "includes/search_form.html" %}
+  </p>
+  {% if transfer_list %}
+    <table class="table">
+      <tr>
+        <th>From</th>
+        <th>To</th>
+        <th>Amount</th>
+        <th>Date</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+      {% for transfer in transfer_list %}
+        {% if transfer.from_budget.owner.id == user.id and transfer.to_budget.owner.id == user.id %}
+          <tr>
+            <td>{{ transfer.from_budget.title }}</td>
+            <td>{{ transfer.to_budget.title }}</td>
+            <td>{{ transfer.amount }}</td>
+            <td>{{ transfer.date }}</td>
+            <td><a class="btn btn-primary" href="{% url 'planner:transfer-update' transfer.id %}">Update</a></td>
+            <td><a class="btn btn-danger" href="{% url 'planner:transfer-delete' transfer.id %}">Delete</a></td>
+          </tr>
+        {% endif %}
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>There's no transfer to display</p>
+  {% endif %}
+{% endblock %}

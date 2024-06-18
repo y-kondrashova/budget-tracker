@@ -34,6 +34,22 @@ used efficiently and effectively
    ```shell
    python manage.py runserver
    ```
+   
+## DB schema
+
+![db_schema.png](db_schema.png)
+   
+## Demo
+
+Check demo-version here:
+
+https://budget-tracker-os6u.onrender.com
+
+### Credentials for test-user:
+
+username: alice
+
+password: 123alise123
 
 ## Features
 

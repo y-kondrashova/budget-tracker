@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Transaction list</h1>
+  <p>
+    <a class="btn btn-success" href="{% url 'planner:transaction-create' %}">Create new transaction</a>
+    {% include "includes/search_form.html" %}
+  </p>
+  {% if transaction_list %}
+    <table class="table">
+      <tr>
+        <th>Type</th>
+        <th>Amount</th>
+        <th>Currency</th>
+        <th>Date</th>
+        <th>Category</th>
+        <th>Budget</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+      {% for transaction in transaction_list %}
+        {% if transaction.budget.owner.id == user.id %}
+          <tr>
+            <td>{{ transaction.transaction_type }}</td>
+            <td>{{ transaction.amount }}</td>
+            <td>{{ transaction.amount_currency }}</td>
+            <td>{{ transaction.date }}</td>
+            <td>{{ transaction.category.title }}</td>
+            <td>{{ transaction.budget.title }}</td>
+            <td><a class="btn btn-primary" href="{% url 'planner:transaction-update' transaction.id %}">Update</a></td>
+            <td><a class="btn btn-danger" href="{% url 'planner:transaction-delete' transaction.id %}">Delete</a></td>
+          </tr>
+        {% endif %}
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>There's no transaction to display</p>
+  {% endif %}
+{% endblock %}
